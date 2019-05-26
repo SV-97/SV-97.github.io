@@ -4,29 +4,70 @@ layout: default
 <!DOCTYPE html>
 <html>
     <body>
-        <h1>SV-97</h1>
-        <h2>h2</h2>
-        <h3>h3</h3>
-        <h4>h4</h4>
-        <h5>h5</h5>
-        <h5>h6</h5>
-        <p>Testing hosting on GitHub Pages.</p><br>
+        <p>I don't even know what this is. A blog? We'll see</p><br>
+
+        <h1>McCulloch/Pitts neuron model</h1>
+        <p>
+            So I came across the McCulloch/Pitts (I'll just call it Mcp) neuron model while reading on ANNs today. The Mcp is a comparatively easy model that doesn't have a concept of weights. The neurons are of a binary nature. They fire if the sum of their inputs exceed a treshold value (called S in the following). They also have inhibitor inputs that prevent the neuron from firing completely if they're present.
+            Naturally I chose to <a href="https://github.com/SV-97/Py3-Private/tree/master/P3_060_NeuroComputingBasics">implement it in python</a> and play around with it.
+            I started off with creating AND and OR gates from the neurons which worked great.
+            <table>
+                <tr>
+                    <th><h2>AND-Gate</h2></th>
+                    <th><h2>OR-Gate</h2></th>
+                </tr>
+                <tr>
+                    <td><img src="./media/mcp_and.png"></td>
+                    <td><img src="./media/mcp_or.png"></td>
+                </tr>
+            </table>
+            But I stumbled a bit with the XOR i chose next. I didn't really think about it and just "wired it up" according to boolean algebra where the XOR is defined as follows: <br>
+            <img src="http://latex.codecogs.com/svg.latex?A xor B := (A \land \neg B) \lor (\neg A \land B)" border="0" style="background-color:white !important; padding:2px; height: 500%"/><br>
+            I just connected normal inputs to the node's inputs, and negated ones to the inhibition. This fails because that way the treshold value isn't reached and it can't possibly fire with the inhibitor being > 0.
+            While it took me some time to figure this out I was able to quickly adapt to it and create a few more complex gates after I did.
+            <table>
+                <tr>
+                    <th><h2>XOR-Gate</h2></th>
+                    <th><h2>NAND-Gate</h2></th>
+                </tr>
+                <tr>
+                    <td><img src="./media/mcp_xor.png"></td>
+                    <td><img src="./media/mcp_nand.png"></td>
+                </tr>
+            </table>
+
+            After I was done playing around with it I thought that this was a bit short of an "exploration" and constructing the nets by hand like this was too big of a hassle and decided to write a small DSL to automate it.
+            The language looks like this
+            <code>
+<div class="highlight"><pre>
+<span class="n">title</span><span class="p">:</span> <span class="n">XOR</span><span class="o">-</span><span class="n">Gate</span> <span class="n">using</span> <span class="n">McCulloch</span><span class="o">-</span><span class="n">Pitts</span><span class="o">-</span><span class="n">Neurons</span>
+<span class="ow">in</span><span class="p">:</span> <span class="n">a</span> <span class="n">b</span>
+<span class="n">out</span><span class="p">:</span> <span class="n">X</span>
+<span class="n">c</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">d</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">e</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">a</span> <span class="o">--</span> <span class="n">c</span>
+<span class="n">b</span> <span class="o">-</span><span class="n">o</span> <span class="n">c</span>
+<span class="n">a</span> <span class="o">-</span><span class="n">o</span> <span class="n">d</span>
+<span class="n">b</span> <span class="o">--</span> <span class="n">d</span>
+<span class="n">d</span> <span class="o">--</span> <span class="n">e</span>
+<span class="n">c</span> <span class="o">--</span> <span class="n">e</span>
+<span class="n">e</span> <span class="o">--</span> <span class="n">X</span>
+</pre></div>     
+            </code>
+            Which of course is fairly minimalistic but enough for what I wanted to do here. It also transpiles to graphviz-dot to generate these graphs I've had in here. The language essentialy comes down to declaring inputs with "in:", outputs with "out:", internal neurons with their name followed by their treshold and connections with  "--" for regular links and "-o" for inhibitions.
+            I've also tried using regular expressions for parsing which was a first but worked out fairly well ( even though the code isn't exactly beautiful ).
+
+            Just for the fun of it I also built a two bit half-adder using these neurons and I haven't tested it yet, but I think it works (In case anyone is interested: it took about 50 lines of my descriptor-code).
+            <h2>Two-Bit-Half-Adder</h2>
+            <img src="./media/mcp_adder.png">
+        </p>
+
+        <h1>Other stuff and tests</h1>
         <a href="https://sites.google.com/view/sv-cad/">CAD Services</a> - Where I post everything regarding my CAD work.<br>
+        <a href="./books.html">Book index</a> - Books I'm currently reading, have already finished, on backlog etc. you get the notion<br>
         <a href="./test.html">test.html</a> - Just some test file<br>
-        <code>
-<div class="highlight"><pre><span></span><span class="c1"># pygmentize -f html -o ./test.html ./test.py</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
-
-<span class="nd">@classdecorator</span>
-<span class="k">class</span> <span class="nc">A</span><span class="p">():</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;Test&quot;</span>
-</pre></div>  
-        </code>
         <p>Testing some <img src="http://latex.codecogs.com/svg.latex?\LaTeX" border="0" style="background-color:white !important; padding:2px; max-height: 200%"/>:</p> <img src="http://latex.codecogs.com/svg.latex?e^{\i \cdot \varphi} = cos(\varphi) + \i sin(\varphi)" border="0" style="background-color:white !important; padding:2px; height: 500%"/>
     </body>
 </html>
