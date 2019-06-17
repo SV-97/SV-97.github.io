@@ -4,7 +4,7 @@ layout: default
 
 # Human Resource Machine *XASM*
 
-**10.06.19**
+###### 10.06.19
 
 Ok, so I came across a game called Human Resource Machine last week and blasted through it fairly quickly (I can only recommend it). The game basically is programming a sort of graphical assembly and the sole reason I'm writing about it here is: it supports importing and exporting and exporting source code. The HRM asm has a register based instruction set with only ten instructions:
 
@@ -36,7 +36,7 @@ Overall this was a really fun project and great exercise in using Rust - I'm kin
 
 # McCulloch/Pitts neuron model
 
-**26.05.19**
+###### 26.05.19
 
 So I came across the McCulloch/Pitts (I'll just call it Mcp) neuron model while reading on ANNs today. The Mcp is a comparatively easy model that doesn't have a concept of weights. The neurons are of a binary nature. They fire if the sum of their inputs exceed a treshold value (called S in the following). They also have inhibitor inputs that prevent the neuron from firing completely if they're present.
 Naturally I chose to [implement it in python](https://github.com/SV-97/Py3-Private/tree/master/P3_060_NeuroComputingBasics) and play around with it.
