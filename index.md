@@ -1,6 +1,13 @@
 ---
 layout: default
+title: SV-97's Webthingy
+mathjax: true
 ---
+<head>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js">
+    </script>
+</head>
 
 \(\frac{1}{8.5}\)
 \[\frac{1}{8.5}\]
