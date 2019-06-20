@@ -1,3 +1,4 @@
 theme: jekyll-theme-hacker
 title: SV-97's Webthingy
 description: Posting on various tech and programming related topics
+markdown: kramdown

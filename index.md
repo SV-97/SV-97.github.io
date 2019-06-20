@@ -2,6 +2,11 @@
 layout: default
 ---
 
+\(\frac{1}{8.5}\)
+\[\frac{1}{8.5}\]
+$\frac{1}{8.5}$
+$$\frac{1}{8.5}$$
+
 # UTF-8
 Ok, so I've guest authored on a blog ([pylenin](https://www.pylenin.com/blogs/python-comparison-operators/)) recently and thought I might as well share what I've written up here.
 The original blog was on comparison operators in python and how comparison based on ASCII works - My contribution is on UTF-8/why and ASCII explanation still holds for the most part.
