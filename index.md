@@ -2,6 +2,19 @@
 layout: default
 ---
 
+# On the periodicity of the sums of sines
+
+###### 20.06.19
+
+Ok so I've thought about this before because wolfram-alpha for example says that a function like the one in the following plot isn't periodic:  
+![Periodicity example](./media/periodicity_example.png)  
+Which, just from looking at the plot, seems wrong. Calculating specific values also seems to support that it's a periodic function. So I've set out to prove that they're wrong.
+<a href="./media/periodicity.pdf" target="_blank">PDF with proof</a>
+If you find anything wrong with the proof please let me know.
+
+---
+---
+
 # Human Resource Machine *XASM*
 
 ###### 10.06.19
@@ -43,6 +56,7 @@ I mapped the original instructions 1:1 to bytecode and wrote a register machine 
 Because I wanted to be able to have some color in the output I also implemented a "logging" system with a *colored!*-macro that allows applying most of the ANSI-codes to format strings and is also easily extendable via a trait if I did miss something.  
 Overall this was a really fun project and great exercise in using Rust - I'm kinda tempted to reimplement it in C or more likely C++, just to see how much more of a pain that would be, but I don't think I'll actually do that.  
 
+---
 ---
 
 # McCulloch/Pitts neuron model
@@ -97,6 +111,7 @@ Just for the fun of it I also built a two bit half-adder using these neurons and
 
 ![Two-Bit-Half-Adder](./media/mcp_adder.png)
 
+---
 ---
 
 # Other stuff
