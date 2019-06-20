@@ -2,6 +2,67 @@
 layout: default
 ---
 
+# UTF-8
+Ok, so I've guest authored on a blog ([pylenin](https://www.pylenin.com/blogs/python-comparison-operators/)) recently and thought I might as well share what I've written up here.
+The original blog was on comparison operators in python and how comparison based on ASCII works - My contribution is on UTF-8/why and ASCII explanation still holds for the most part.
+
+## Excerpt from pylenin
+
+### Enter: UTF-8
+
+The thing is... Python doesn't actually use ASCII - most systems don't. But the explanations given above still hold true for the most part.
+Now Python doesn't actually use ASCII (at least since Python 3 came out - Python 2 *did* use ASCII), but rather another encoding called **UTF-8** where UTF stands for **UCS Transformation Format** and UCS stands for **Universal Coded Character Set**. UTF-8 is what is called a **variable width encoding** and the de facto standard when it comes to **Unicode**. The beauty of UTF-8 is that it supports loads of special characters - but not at the price of making the regularly used characters (for the western world at least) need more memory. This is the *variable width* part mentioned earlier. 
+
+#### The gritty details
+
+If we take a look at the most common characters used, their memory representation looks like this:
+
+```rust
+'R' => 0b0101_0010 <U+0052>
+'s' => 0b0111_0011 <U+0073>
+```
+
+The part in angled brackets is called a **unicode code point**. It's usually written in hex - as it is here. If you compare these values to their ASCII pendant, you'll see that they're actually the same. This is another great property of UTF-8 - it's backwards compatible with ASCII and also the reason, why the above explanation still holds true for the most part. 
+The code points up to `U+007F` are encoded in on byte of data with every codepoint starting with a `0`. This means there are 7 bits to represent all the ASCII symbols. If you go higher than that, you'll have a header byte that always starts with `11` and additional data bytes that start with `10`. 
+Let's for example take Unicode code point `U+2705` (Called `:white_check_mark:`, it's the ✅ emoji). We get the binary represantation `0b1110_0010_1001_1100_1000_0101`, which in hex is `0xe29c85`. We can see that it's a three byte code point and can also see the initial `11` and following `10`s. UTF-8 may encode codepoints with up to 4 bytes. 
+
+#### Potential pitfalls
+
+So this is all fair and well and feels like it's just ASCII with more characters - the thing is, it isn't. Becaus a unicode *character* may actually consist of multiple *codepoints*. A good example for this are for example the flag emojis which consist of **regional indicator symbols**. The flag of peru for example consists of the codepoints `U+1F1F5` and `U+1F1EA`. It's two codepoints that, if the target system supports it, are rendered as a single character.
+So in the end unicode and UTF-8 are fairly complicated topics - but you rarely need all this extra information, because if you just want to sort something alphabetically, you'll most likely deal with the basic ASCII character set. 
+
+#### A bit of insider knowledge
+
+Should you ever need the ASCII letters or something similar in your code - don't hardcode them in please. They're all available in the standardlibrary's [`string` module](https://docs.python.org/3/library/string.html).
+```python3
+>>> from pprint import pprint
+>>> import string
+>>> pprint(list(filter(lambda name: not name.startswith("_"), dir(string))))
+['Formatter',
+ 'Template',
+ 'ascii_letters',
+ 'ascii_lowercase',
+ 'ascii_uppercase',
+ 'capwords',
+ 'digits',
+ 'hexdigits',
+ 'octdigits',
+ 'printable',
+ 'punctuation',
+ 'whitespace']
+```
+
+#### Resources
+* [Python docs on comparisons of sequences](https://docs.python.org/3/tutorial/datastructures.html#comparing-sequences-and-other-types)
+* [Python docs on unicode](https://docs.python.org/3/howto/unicode.html)
+* [Wikipedia Article on UTF-8](https://en.wikipedia.org/wiki/UTF-8)
+* [Wikipedia Article on variable width encoding](https://en.wikipedia.org/wiki/Variable-width_encoding)
+* [Great talk on emoji/unicode in German](https://youtu.be/73VEB2zr4HU)
+* [Computerphile video on unicode](https://youtu.be/MijmeoH9LT4)
+
+---
+---
+
 # On the periodicity of the sums of sines
 
 ###### 20.06.19
@@ -11,6 +72,11 @@ Ok so I've thought about this before because wolfram-alpha for example says that
 Which, just from looking at the plot, seems wrong. Calculating specific values also seems to support that it's a periodic function. So I've set out to prove that they're wrong.
 <a href="./media/periodicity.pdf" target="_blank">PDF with proof</a>
 If you find anything wrong with the proof please let me know.
+
+**EDIT**: Turns out that wolfram alpha actually seems to do it right but is really picky about how you plug the numbers in.  
+For example: Take $\sin(8.5 \cdot 2 \pi x) + \sin(17 \cdot 2 \pi x)$.
+Plugging this in as [`period of sin(8.5*2*pi*x) + sin(17*2*pi*x)`](https://www.wolframalpha.com/input/?i=period+of+sin(8.5*2*pi*x)+%2B+sin(17*2*pi*x)) leads WA to say that it's not periodic. It however thinks differently when you plug the exact same thing in as [`period of sin(17*pi*x) + sin(34*pi*x)`](https://www.wolframalpha.com/input/?i=period+of+sin(17*pi*x)+%2B+sin(34*pi*x)). It now says that it's periodic in $\frac{2}{17}$. Using the methods from my proof we get $\frac{1}{8.5}$ which of course is the exact same thing.  
+But if we go ahead and add decimal points to the numbers in our WA formula like this [`period of sin(17.0*pi*x) + sin(34.0*pi*x)`](https://www.wolframalpha.com/input/?i=period+of+sin(17.0*pi*x)+%2B+sin(34.0*pi*x)) WA is back to thinking that it's not a periodic function. This probably comes down to it not going symbolically here but rather using floating point arithmetic. We can also see this at work when comparing [`plot sin(17*pi*x) - sin(2*8.5*pi*x)`](https://www.wolframalpha.com/input/?i=plot+sin(17*pi*x)+-+sin(2*8.5*pi*x)) and [`plot sin(17.0*pi*x) - sin(2*8.5*pi*x)`](https://www.wolframalpha.com/input/?i=plot+sin(17.0*pi*x)+-+sin(2*8.5*pi*x)). One of them gives the expected plot - the other one however...gives just about zero but with bumps every now and then. Just goes to show that you should always consider the capabilities of the systems you're using.
 
 ---
 ---
