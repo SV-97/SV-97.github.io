@@ -159,16 +159,31 @@ Then we just append the coin, subtract it for the next step and move on.
 
 Now the last way I'll cover is doing it functionally. This is last because it requires us to have a different interface as the other functions because we can't have a global cash register (or else it wouldn't be pure) (we could use an interface method theoretically though). This is also a fully recursive way of solving this problem. Ok here we go:
 
-Python | Haskell
---- | ---
-`def functional(cash_register, amount):`| `getChange :: [Int] -> Int -> [Int]`
-`&nbsp; &nbsp; if amount == 0: return []` | `getChange _ 0 = []`
-`&nbsp; &nbsp; if len(cash_register) == 0: return []` | `getChange [] _ = []`
-`&nbsp; &nbsp; c, *r = cash_register` | `getChange (c: r) amount =`
-`&nbsp; &nbsp; if amount - c >= 0:` | `&nbsp; &nbsp; if amount - c >= 0`
-`&nbsp; &nbsp; &nbsp; &nbsp; return [c, *functional(cash_register, amount - c)]` | `&nbsp; &nbsp; &nbsp; &nbsp; then c: (getChange (c:r) (amount - c))`
-`&nbsp; &nbsp; else:` |
-`&nbsp; &nbsp; &nbsp; &nbsp; return functional(r, amount)` | `&nbsp; &nbsp; &nbsp; &nbsp; else getChange r amount`
+### Python
+
+```python
+def functional(cash_register, amount):
+    if amount == 0: return []
+    if len(cash_register) == 0: return []
+    c, *r = cash_register
+    if amount - c >= 0:
+        return [c, *functional(cash_register, amount - c)]
+    else:
+        return functional(r, amount)
+```
+
+### Haskell
+
+```haskell
+getChange :: [Int] -> Int -> [Int]
+getChange _ 0 = []
+getChange [] _ = []
+getChange (c: r) amount = 
+    if amount - c >= 0
+        then c: (getChange (c:r) (amount - c))
+        else getChange r amount
+
+```
 
 Just to clarify: this is the same code - once written in Python and once in Haskell. The Haskell one allows us to do a bit of fancy stuff but we'll get to that.
 The first line is a function definition in both cases. The second one handles the case that the amount of money is 0. If we don't have anything to generate change for we of course give back an empty list. Same thing if we don't have anything in our cash register: we can't possibly give anything back, so the empty list it is.
