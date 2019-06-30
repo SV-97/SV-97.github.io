@@ -4,7 +4,12 @@ title: SV-97's Webthingy
 mathjax: true
 ---
 
-# The coin change problem
+# Articles
+
+* [The coin change problem][1]
+* [UTF-8][2]
+
+# [1]: The coin change problem
 
 ###### 23.06.19
 
@@ -207,6 +212,8 @@ The two functions are basically identical - except that the Haskell one allows u
 ---
 
 # UTF-8
+
+[2]: UTF-8
 
 ###### 21.06.19
 
