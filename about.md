@@ -8,7 +8,7 @@ title: About me
 I am an Electrician for buildings and power services, state certified engineer/technician for electrical engineering specialized in IT, PLC-specialist - studying industrial mathematics starting 10.2019.
 I do CAD work on the side - usually for knifemakers.
 
-I mainly do Python and Rust - but like to try new languages all the time.
+I mainly do Python and Rust - but like to try new languages all the time - currently in the deep ends of Haskell.
 
 ## (Programming) History
 
