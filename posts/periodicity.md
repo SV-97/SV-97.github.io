@@ -9,9 +9,9 @@ mathjax: true
 ###### 20.06.19
 
 Ok so I've thought about this before because wolfram-alpha for example says that a function like the one in the following plot isn't periodic:  
-![Periodicity example](./media/periodicity_example.png)  
+![Periodicity example](../media/periodicity_example.png)  
 Which, just from looking at the plot, seems wrong. Calculating specific values also seems to support that it's a periodic function. So I've set out to prove that they're wrong.
-<a href="./media/periodicity.pdf" target="_blank">PDF with proof</a>
+<a href="../media/periodicity.pdf" target="_blank">PDF with proof</a>
 If you find anything wrong with the proof please let me know.
 
 **EDIT**: Turns out that wolfram alpha actually seems to do it right but is really picky about how you plug the numbers in.  

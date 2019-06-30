@@ -17,14 +17,14 @@ I started off with creating AND and OR gates from the neurons which worked great
 
 |                         AND-Gate |                        OR-Gate |
 |:--------------------------------:|:------------------------------:|
-| ![AND-Gate](./media/mcp_and.png) | ![OR-Gate](./media/mcp_or.png) |
+| ![AND-Gate](../media/mcp_and.png) | ![OR-Gate](../media/mcp_or.png) |
 
 I just connected normal inputs to the node's inputs, and negated ones to the inhibition. This fails because that way the treshold value isn't reached and it can't possibly fire with the inhibitor being > 0.
 While it took me some time to figure this out I was able to quickly adapt to it and create a few more complex gates after I did.
 
 |                        XOR-Gate |                          NAND-Gate |
 |:-------------------------------:|:----------------------------------:|
-|![XOR-Gate](./media/mcp_xor.png) | ![NAND-Gate](./media/mcp_nand.png) |
+|![XOR-Gate](../media/mcp_xor.png) | ![NAND-Gate](../media/mcp_nand.png) |
 
 ## Modelling DSL
 
@@ -54,7 +54,7 @@ Just for the fun of it I also built a two bit half-adder using these neurons and
 
 ## Two-Bit-Half-Adder
 
-![Two-Bit-Half-Adder](./media/mcp_adder.png)
+![Two-Bit-Half-Adder](../media/mcp_adder.png)
 
 ---
 ---
