@@ -12,17 +12,18 @@ So since I spend a lot of my sparetime reading, I thought making a list of all t
   * C/C++ by Ulrich Kaiser & Martin Guddat in German
   * Neuronale Netze programmieren mit Python by Roland Schwaiger & Joachim Steinwendner in German
   * Computergrafik by Alfred Nischwitz, Max Fischer, Peter Haberäcker & Gudrun Socher in German
+  * Hacking by Jon Erickson in English
+  * Making Embedded Systems by Elecia White in English
+  * Real World Haskell by Bryan O'Sullivan, John Goerzen & Don Stewart
 * Not strictly programming related
   * Soft-Computing by Wolfram-Manfred Lippe in German
   * Rechnerarchitektur by Andrew S. Tanenbaum & Todd Austin in German
 * Non programming related
-  * Wie man mathematisch denkt by Kevin Houston
-  * Things to make and do in the fourth Dimension by Matt Parker in English
+  * How not to be wrong by Jordan Ellenberg in English
 * On Backlog
   * Linux-Unix Programmierung by Jürgen Wolf & Klaus-Jürgen Wolf in German
-  * Hacking by Jon Erickson in English
-  * Making Embedded Systems by Elecia White in English
-  * How not to be wrong by Jordan Ellenberg in English
+  * Seven Languages in Seven Weeks by Bruce A. Tate
+  * Ghost in the wires by Kevin Mitnick
 * Finished
   * Automatisieren mit STEP 7 in AWL und SCL by Hans Berger in German
   * Python 3 by Johannes Ernesti & Peter Kaiser in German
@@ -33,3 +34,5 @@ So since I spend a lot of my sparetime reading, I thought making a list of all t
   * New Thinking by Dagogo Altraide in English
   * Language Implementation Patterns by Terrence Parr in English
   * Haskell Intensivkurs by Marco Block & Adrian Neumann in German
+  * Wie man mathematisch denkt by Kevin Houston
+  * Things to make and do in the fourth Dimension by Matt Parker in English
