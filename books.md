@@ -14,16 +14,19 @@ So since I spend a lot of my sparetime reading, I thought making a list of all t
   * Computergrafik by Alfred Nischwitz, Max Fischer, Peter Haberäcker & Gudrun Socher in German
   * Hacking by Jon Erickson in English
   * Making Embedded Systems by Elecia White in English
-  * Real World Haskell by Bryan O'Sullivan, John Goerzen & Don Stewart
+  * Seven Languages in Seven Weeks by Bruce A. Tate, Fred Daoud, Ian Dees and Jack Moffitt
+  * Programming Webassembly with Rust by Kevin Hoffmann
+  * Crafting Interpreters by Bob Nystrom
 * Not strictly programming related
   * Soft-Computing by Wolfram-Manfred Lippe in German
   * Rechnerarchitektur by Andrew S. Tanenbaum & Todd Austin in German
+  * An Invitation to Applied Category Theory by Brendan Fong and David I. Spivak
 * Non programming related
   * How not to be wrong by Jordan Ellenberg in English
+  * Ghost in the wires by Kevin Mitnick
+  * Roter Mars by Kim Stanley Robinson
 * On Backlog
   * Linux-Unix Programmierung by Jürgen Wolf & Klaus-Jürgen Wolf in German
-  * Seven Languages in Seven Weeks by Bruce A. Tate
-  * Ghost in the wires by Kevin Mitnick
 * Finished
   * Automatisieren mit STEP 7 in AWL und SCL by Hans Berger in German
   * Python 3 by Johannes Ernesti & Peter Kaiser in German
@@ -36,3 +39,5 @@ So since I spend a lot of my sparetime reading, I thought making a list of all t
   * Haskell Intensivkurs by Marco Block & Adrian Neumann in German
   * Wie man mathematisch denkt by Kevin Houston
   * Things to make and do in the fourth Dimension by Matt Parker in English
+  * Real World Haskell by Bryan O'Sullivan, John Goerzen & Don Stewart
+  * Seven Languages in Seven Weeks by Bruce A. Tate
