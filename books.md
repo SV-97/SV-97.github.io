@@ -17,7 +17,6 @@ So since I spend a lot of my sparetime reading, I thought making a list of all t
   - Programming Webassembly with Rust by Kevin Hoffmann
   - Crafting Interpreters by Bob Nystrom
   - Parallel and Concurrent Programmin in Haskell by Simon Marlow
-  - Domain Modeling Made Functional by Scott Wlaschin
 - Not strictly programming related
   - Soft-Computing by Wolfram-Manfred Lippe in German
   - Rechnerarchitektur by Andrew S. Tanenbaum & Todd Austin in German
@@ -45,3 +44,5 @@ So since I spend a lot of my sparetime reading, I thought making a list of all t
   - Seven More Languages in Seven Weeks by Bruce A. Tate, Fred Daoud, Ian Dees and Jack Moffitt
   - The Ray Tracer Challenge by Jamis Buck
   - Ghost in the wires by Kevin Mitnick
+  - Domain Modeling Made Functional by Scott Wlaschin
+  - Permanent Record by Edward Snowden

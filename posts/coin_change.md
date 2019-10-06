@@ -144,16 +144,16 @@ def func_it(paid):
         paid -= out_coin
     return out_coins
 ```
+
 We again start out with an empty list to hold the change we give out. We then iterate as long as our paid value is bigger than our price - so as long as we have a nonzero difference.
 Then it gets a bit messy. Let's go through this one by one:
 
-* `map(lambda coin: ((paid - price) - coin, coin), cash_register)` We start off by mapping a function to our cash register. This function calculates the difference between how much the customer has paid to much and every coin in the cash register and then packages this difference into a tuple together with the corresponding coin value. We'll call this `map_` in the following snippet.
-* `filter(lambda pair: pair[0] >= 0, map_)` We now filter out all of the pairs, for which the `0`th value is less than 0. So all the coins that would be too big. Lets call this stage `filter_`
-* `min(filter_, key: lambda m: m[0])` we now take the pair with the smallest difference from our iterator.
-* `min_[1]` and take the first elementh from it which is our coin.
+- `map(lambda coin: ((paid - price) - coin, coin), cash_register)` We start off by mapping a function to our cash register. This function calculates the difference between how much the customer has paid to much and every coin in the cash register and then packages this difference into a tuple together with the corresponding coin value. We'll call this `map_` in the following snippet.
+- `filter(lambda pair: pair[0] >= 0, map_)` We now filter out all of the pairs, for which the `0`th value is less than 0. So all the coins that would be too big. Lets call this stage `filter_`
+- `min(filter_, key: lambda m: m[0])` we now take the pair with the smallest difference from our iterator.
+- `min_[1]` and take the first elementh from it which is our coin.
 
 Then we just append the coin, subtract it for the next step and move on.
-
 
 ## Purely Functional
 
@@ -178,7 +178,7 @@ def functional(cash_register, amount):
 getChange :: [Int] -> Int -> [Int]
 getChange _ 0 = []
 getChange [] _ = []
-getChange (c: r) amount = 
+getChange (c: r) amount =
     if amount - c >= 0
         then c: (getChange (c:r) (amount - c))
         else getChange r amount
@@ -187,7 +187,7 @@ getChange (c: r) amount =
 
 Just to clarify: this is the same code - once written in Python and once in Haskell. The Haskell one allows us to do a bit of fancy stuff but we'll get to that.
 The first line is a function definition in both cases. The second one handles the case that the amount of money is 0. If we don't have anything to generate change for we of course give back an empty list. Same thing if we don't have anything in our cash register: we can't possibly give anything back, so the empty list it is.
-Then it gets a bit more interesting. We start off by decomposing our cash register into its *head* (the biggest coin in the register) and it's *tail* (the rest). In the Haskell example we also bind the lone integer we passed in to the name `amount`.
+Then it gets a bit more interesting. We start off by decomposing our cash register into its _head_ (the biggest coin in the register) and it's _tail_ (the rest). In the Haskell example we also bind the lone integer we passed in to the name `amount`.
 We then determine if the current coin is a valid choice. If it is we say "build a list with the current coin as the first element, the rest of the list should be whatever is in this other list" where the other list is a call to `getChange` with the full cash register and an reduced amount of money.
 If the current coin isn't a fit we drop it from the list of possible values by calling `getChange` with only the tail of our list.
 
@@ -204,4 +204,5 @@ The two functions are basically identical - except that the Haskell one allows u
 ```
 
 ---
+
 ---
