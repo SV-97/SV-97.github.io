@@ -9,23 +9,19 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Stefan Volz</title>
-<meta name="description" content="Student of industrial mathematics, state certified electrical engineer specialized in IT and electrician. Doing research in high performance computing for finite element simulations. Interested in all kinds of tech and mathematics, spaceflight and programming languages.">
+<!-- begin _includes/seo.html --><title>Human Resource Machine XASM - Stefan Volz</title>
+<meta name="description" content="Ok, so I came across a game called Human Resource Machine last week and blasted through it fairly quickly (I can only recommend it). The game basically is programming a sort of graphical assembly and the sole reason I’m writing about it here is: it supports importing and exporting and exporting source code.">
 
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Stefan Volz">
-<meta property="og:title" content="Stefan Volz">
-<meta property="og:url" content="http://localhost:4000/">
+<meta property="og:title" content="Human Resource Machine XASM">
+<meta property="og:url" content="http://localhost:4000/2019/10/06/hrm.html">
 
 
-  <meta property="og:description" content="Student of industrial mathematics, state certified electrical engineer specialized in IT and electrician. Doing research in high performance computing for finite element simulations. Interested in all kinds of tech and mathematics, spaceflight and programming languages.">
-
-
-
-  <meta property="og:image" content="http://localhost:4000/assets/images/banner.jpeg">
+  <meta property="og:description" content="Ok, so I came across a game called Human Resource Machine last week and blasted through it fairly quickly (I can only recommend it). The game basically is programming a sort of graphical assembly and the sole reason I’m writing about it here is: it supports importing and exporting and exporting source code.">
 
 
 
@@ -33,10 +29,14 @@
 
 
 
+  <meta property="article:published_time" content="2019-10-06T00:00:00+02:00">
 
 
 
-<link rel="canonical" href="http://localhost:4000/">
+
+
+
+<link rel="canonical" href="http://localhost:4000/2019/10/06/hrm.html">
 
 
 
@@ -87,7 +87,7 @@
 
   </head>
 
-  <body class="layout--home">
+  <body class="layout--posts">
     <nav class="skip-links">
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
@@ -126,24 +126,6 @@
 
     <div class="initial-content">
       
-  
-
-
-
-
-
-
-
-<div class="page__hero"
-  style=" background-image: url('');"
->
-  
-    <img src="/assets/images/banner.jpeg" alt="" class="page__hero-image">
-  
-  
-</div>
-
-
 
 
 
@@ -153,19 +135,76 @@
 
   <div class="archive">
     
-      <h1 id="page-title" class="page__title"></h1>
+      <h1 id="page-title" class="page__title">Human Resource Machine *XASM*</h1>
     
-    
+    <p>Ok, so I came across a game called Human Resource Machine last week and blasted through it fairly quickly (I can only recommend it). The game basically is programming a sort of graphical assembly and the sole reason I’m writing about it here is: it supports importing and exporting and exporting source code.</p>
+
+<h2 id="instruction-set">Instruction set</h2>
+
+<p>The HRM asm has a register based instruction set with only ten instructions:</p>
+
+<ul>
+  <li><strong>Inbox</strong>: Fetch a new input block (an int between -999 and 999 or a char) from the input stream</li>
+  <li><strong>Outbox</strong>: Write your current accumulator to the output stream</li>
+  <li><strong>Copyfrom</strong> rs: Copy to the accumulator from register rs</li>
+  <li><strong>Copyto</strong> rd: Copy the accumulator to register rd</li>
+  <li><strong>Add</strong> rs: Add rs to the accu</li>
+  <li><strong>Sub</strong> rs: Subtract rs from the accu</li>
+  <li><strong>Bumpup</strong> rd: Increment rd and load to accu</li>
+  <li><strong>Bumpdn</strong> rd: Decrement rd and load to accu</li>
+  <li><strong>Jump</strong> m: Jump to m</li>
+  <li><strong>Jumpz</strong> m: Jump to m if accu is zero</li>
+  <li><strong>Jumpn</strong> m: Jump to m if accu is less than zero</li>
+</ul>
+
+<p>and also supports pointers (surrrounding a register with brackets makes it a pointer) and single line comments.
+Now this is great, but I kinda wanted to do more complicated stuff/ do complicated stuff more easily… so naturally I wrote my own language that offers just slightly more abstraction over HRM’s vanilla language and compiles to native HRM ASM.</p>
+
+<h2 id="features-of-xasm">Features of <em>XASM</em></h2>
+
+<p>My extended asm (I dubbed it <em>XASM</em>) has a new language feature that allows defining the available amount of memory. You then can easily use variables or essentially named registers without having to worry about their actual adresses - they’re distributed automatically. I didn’t add any new instructions because that would kinda take the fun out of the game.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p><a href="https://github.com/SV-97/HumanResourceMachine">When it got to implementing the whole thing</a> I started by writing it in Python which worked great. But when I already had the tokenizer etc. I thought that I might as well think of a bytecode, compile the whole thing and build a VM for it. I started doing this in python but then decided to switch over to Rust which seems to be so much nicer when it comes to building language applications (though I think the new walrus operator coming with Python 3.8 will bring some remedy in that domain). I implemented the following architecture:</p>
+
+<p><img src="https://raw.githubusercontent.com/SV-97/HumanResourceMachine/master/architecture.png" alt="Architecture" /></p>
+
+<p>It overall was a fairly straightforward process - I stumbled a bit over the pointers but I had to use 16-bit numbers anyway (With 8-bit jumps - I don’t think anyone will create programs that are over 255 instructions long) for the operands, so I just used one bit of those for the pointer.</p>
+
+<p>I mapped the original instructions 1:1 to bytecode and wrote a register machine to execute the whole thing.<br />
+Because I wanted to be able to have some color in the output I also implemented a “logging” system with a <em>colored!</em>-macro that allows applying most of the ANSI-codes to format strings and is also easily extendable via a trait if I did miss something.<br />
+Overall this was a really fun project and great exercise in using Rust - I’m kinda tempted to reimplement it in C or more likely C++, just to see how much more of a pain that would be, but I don’t think I’ll actually do that.</p>
+
+<hr />
+<hr />
 
 
-<h3 class="archive__subtitle">Recent Posts</h3>
-
-
-
-
-<div class="entries-list">
+<ul class="taxonomy__index">
   
-    
+  
+    <li>
+      <a href="#2021">
+        <strong>2021</strong> <span class="taxonomy__count">2</span>
+      </a>
+    </li>
+  
+    <li>
+      <a href="#2019">
+        <strong>2019</strong> <span class="taxonomy__count">3</span>
+      </a>
+    </li>
+  
+</ul>
+
+
+
+
+  <section id="2021" class="taxonomy__section">
+    <h2 class="archive__subtitle">2021</h2>
+    <div class="entries-list">
+      
+        
 
 
 
@@ -185,8 +224,8 @@
   </article>
 </div>
 
-  
-    
+      
+        
 
 
 
@@ -208,8 +247,16 @@
   </article>
 </div>
 
-  
-    
+      
+    </div>
+    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
+  </section>
+
+  <section id="2019" class="taxonomy__section">
+    <h2 class="archive__subtitle">2019</h2>
+    <div class="entries-list">
+      
+        
 
 
 
@@ -229,8 +276,8 @@
   </article>
 </div>
 
-  
-    
+      
+        
 
 
 
@@ -250,8 +297,8 @@
   </article>
 </div>
 
-  
-    
+      
+        
 
 
 
@@ -271,10 +318,10 @@
   </article>
 </div>
 
-  
-</div>
-
-
+      
+    </div>
+    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
+  </section>
 
 
   </div>
