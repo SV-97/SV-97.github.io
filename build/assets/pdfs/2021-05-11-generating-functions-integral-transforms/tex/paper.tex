@@ -1,0 +1,326 @@
+%%% Template originaly created by Karol Kozioł (mail@karol-koziol.net) and modified for ShareLaTeX use
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[german]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\renewcommand\familydefault{\sfdefault}
+%\usepackage{tgheros}
+%\usepackage[defaultmono]{droidmono}
+
+\usepackage{amsmath,amssymb,amsthm,textcomp}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\usepackage{graphics}
+\usepackage{hyperref}
+
+\usepackage{geometry}
+\geometry{left=15mm,right=15mm,%
+bindingoffset=0mm, top=10mm,bottom=10mm}
+
+
+\linespread{1.3}
+
+\newcommand{\linia}{\rule{\linewidth}{0.5pt}}
+
+% custom theorems if needed
+\newtheoremstyle{mytheor}
+    {1ex}{1ex}{\normalfont}{0pt}{\scshape}{.}{1ex}
+    {{\thmname{#1 }}{\thmnumber{#2}}{\thmnote{ (#3)}}}
+
+\theoremstyle{mytheor}
+\newtheorem{defi}{Definition}
+\newtheorem{example}{Beispiel}
+
+% my own titles
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{center}
+\vspace{2ex}
+{\huge \textsc{\@title}}
+\vspace{1ex}
+\\
+\linia\\
+\@author \hfill \@date
+\vspace{4ex}
+\end{center}
+}
+\makeatother
+%%%
+
+% custom footers and headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+%\lfoot{Assignment \textnumero{} 2}
+\cfoot{}
+% \rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\newcommand{\impliesBecause}[1]{\underset{#1}
+{\implies}}
+\renewcommand{\implies}{\Rightarrow}
+\renewcommand{\Re}[0]{\text{Re}}
+\renewcommand{\Im}[0]{\text{Im}}
+\newcommand{\norm}[1]{{\|{#1}\|_2}}
+\newcommand{\spann}[1]{\text{span}(#1)}
+\newcommand{\rang}[0]{\text{Rang}}
+\newcommand{\comp}[0]{\text{comp}}
+\newcommand{\atom}[0]{\text{atom}}
+\newcommand{\diag}[0]{\text{diag}}
+\newcommand{\diagm}[0]{\text{diagmat}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\C}[0]{\mathbb{C}}
+\newcommand{\K}[0]{\mathbb{K}}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+%
+
+% code listing settings
+\usepackage{listings}
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    aboveskip={1.0\baselineskip},
+    belowskip={1.0\baselineskip},
+    columns=fixed,
+    extendedchars=true,
+    breaklines=true,
+    tabsize=4,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=lines,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    keywordstyle=\color[rgb]{0.627,0.126,0.941},
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{01,0,0},
+    numbers=left,
+    numberstyle=\small,
+    stepnumber=1,
+    numbersep=10pt,
+    captionpos=t,
+    escapeinside={\%*}{*)}
+}
+
+%%%----------%%%----------%%%----------%%%----------%%%
+
+\begin{document}
+
+\title{Generierende Funktionen und Integraltransformationen}
+
+\author{Stefan Volz}
+
+\date{\today}
+
+\maketitle
+
+\section{Generierende Funktionen}
+
+\subsection{Fibonacci Folge}
+
+Es sei $(f_n)_{n \in \N_0}$ die durch die Rekursionsvorschrift
+\begin{align*}
+    f_{n+2} = f_{n+1} + f_n, \forall n \in \N_0
+\end{align*}
+definierte Folge mit den Anfangswerten $f_0 = 0, f_1 = 1$.
+Wir wollen nun eine explizite Funktion für $f_n$ finden.
+
+Hierzu definieren wir zunächst die formale Potenzreihe
+\begin{align*}
+    F(x) = \sum_{n=0}^\infty f_n x^n
+\end{align*}
+welche wir als (gewöhnliche) generierende Funktion der Folge $(f_n)$ bezeichnen. Ist nun $x$ eine formale Variable dann können wir obige Rekursionsvorschrift mit $x^{n+2}$ multiplizieren
+\begin{align*}
+    f_{n+2}x^{n+2} = f_{n+1} x^{n+2} + f_n x^{n+2}
+\end{align*}
+und über den Gültigkeitsbereich der Rekursionsvorschrift aufsummieren
+\begin{align*}
+         & \sum_{n=0}^\infty f_{n+2}x^{n+2} = \sum_{n=0}^\infty (f_{n+1} x^{n+2} + f_n x^{n+2})                                                                               \\
+    \iff & \sum_{n=2}^\infty f_n x^n = x \left(\sum_{n=1}^\infty f_n x^n \right) + x^2 \left(\sum_{n=0}^\infty f_n x^n \right)                                                \\
+    \iff & \left( \sum_{n=0}^\infty f_n x^n \right) - f_1 x - f_0 = x \left[\left(\sum_{n=0}^\infty f_n x^n\right) - f_0\right] + x^2 \left( \sum_{n=0}^\infty f_n x^n\right) \\
+    \underset{\substack{f_0 = 0                                                                                                                                               \\ f_1 = 1}}{\iff} & F(x) - x = x F(x) + x^2 F(x)
+\end{align*}
+Dies können wir nach $F(x)$ auflösen und erhalten
+\begin{align*}
+    F(x) = \frac{x}{1-x-x^2}
+\end{align*}
+als zweite Darstellung von $F$.
+Betrachten wir die Taylorentwicklung $T_g$ einer reellen Funktion $g : \R \to \R$ um den Punkt $0$ so gilt
+\begin{align*}
+    T_g(x) = \sum_{n=0}^\infty \frac{g^{(n)}(0)}{n!} x^n
+\end{align*}
+wobei $g^{(n)}$ die $n$-te Ableitung von $g$ ist. Insbesondere ist die Taylorentwicklung eindeutig, wir könnten also die generierende Funktion $F$ in eine Taylorreihe entwickeln und durch einen Koeffizientenvergleich die Gleichung
+\begin{align*}
+    f_n = \frac{g^{(n)}(0)}{n!}
+\end{align*}
+erhalten. Im konkreten Fall (und tatsächlich in sehr vielen Fällen) bietet sich jedoch eine elegantere Methode an. Berechnen wir die Nullstellen des Polynoms $1-x-x^2$ so ergeben sich
+\begin{align*}
+    -\varphi & := -\frac{1+\sqrt{5}}{2} \\
+    -\psi    & := -\frac{1-\sqrt{5}}{2}
+\end{align*}
+und somit zerfällt $1-x-x^2$ zu $-(x+\varphi)(x+\psi)$. Wir wollen nun die Partialbruchzerlegung von $\frac{x}{1-x-x^2}$ bestimmen. Es gilt
+\begin{align*}
+    \frac{x}{1-x-x^2} = \frac{x}{-(x+\varphi)(x+\psi)} & \overset{!}{=} \frac{A}{x+\varphi} + \frac{B}{x+\psi} = \frac{-A(x+\psi) - B(x+\varphi)}{-(x+\varphi)(x+\psi)} \\
+    x = - A(x+\psi) - B(x+\varphi)
+\end{align*}
+Durch Einsetzen von $x=-\varphi$ erhalten wir
+\begin{align*}
+    -\varphi=-A(\psi - \varphi) = A \left(\frac{(1 + \sqrt{5}) - (1-\sqrt{5})}{2} \right) = A \cdot \sqrt{5} & \iff A = -\frac{\varphi}{\sqrt{5}} \\
+    -\psi=-B(\varphi - \psi) = B \left(\frac{(1-\sqrt{5}) - (1 + \sqrt{5})}{2} \right) = B \cdot (-\sqrt{5}) & \iff B = \frac{\psi}{\sqrt{5}}
+\end{align*}
+also ergibt sich
+\begin{align*}
+    F(x) = \frac{\psi}{\sqrt{5} (x+\psi)} - \frac{\varphi}{\sqrt{5} (x+\varphi)} = \frac{1}{\sqrt{5}} \left( \frac{\psi}{x+\psi} - \frac{\varphi}{x+\varphi} \right)
+\end{align*}
+Wir wollen nun jeden dieser beiden Ausdrücke in eine Reihe entwickeln. Betrachten wir den vorderen Ausdruck so gilt
+\begin{align*}
+    \frac{\psi}{x+\psi} = \frac{\psi}{\psi(\frac{x}{\psi} + 1)} = \frac{1}{1+(\frac{x}{\psi})}.
+\end{align*}
+Da $\frac{1}{\psi} = -\varphi$ gilt mit der bekannten Formel der geometrischen Reihe
+\begin{align*}
+    \frac{\psi}{x+\psi} = \frac{1}{1-\varphi x} = \sum_{n=0}^\infty (\varphi x)^n.
+\end{align*}
+Analog zeigen wir
+\begin{align*}
+    \frac{\varphi}{x+\varphi} = \frac{1}{1-\psi x} = \sum_{n=0}^\infty (\psi x)^n
+\end{align*}
+woraus wir direkt
+\begin{align*}
+    F(x) = \frac{1}{\sqrt{5}} \sum_{n=0}^\infty (\varphi^n - \psi^n) x^n
+\end{align*}
+erhalten.
+Somit gilt
+\begin{align*}
+    f_n = \frac{\varphi^n - \psi^n}{\sqrt{5}}.
+\end{align*}
+
+\subsection{Kalkül der generierenden Funktionen}
+
+Um von der Rekursionsbeziehung etwas leichter auf unsere generierende Funktion zu kommen können wir auch ein Kalkül entwickeln welches zu gegebenen Ausdrücken direkt die generierende Funktion angibt. Im folgenden schreibe wir $(a_n)_{n \in \N_0} \longleftrightarrow F(x)$ genau dann wenn $F$ die generierende Funktion von $(a_n)_{n \in \N_0}$ ist.
+Man sieht z.B. leicht, dass
+\begin{align}
+    (a_{n+1})_{n \in \N_0} & \longleftrightarrow xF(x) - a_0                       \label{gfVerschiebungDiskret} \\
+    (a_{n+2})_{n \in \N_0} & \longleftrightarrow x^2F(x) - x a_1 - a_0           \nonumber                       \\
+                           & ~~~\vdots                                          \nonumber                        \\
+    (a_{n+k})_{n \in \N_0} & \longleftrightarrow x^kF(x) - \sum_{n=0}^{k-1} a_k x^k.\nonumber
+\end{align}
+Durch elementweise Differenziation und Integration von $F$ erhalten wir
+\begin{align*}
+    DF(x) = \sum_{n=0}^\infty n a_n x^{n-1} = \sum_{n=0}^\infty (n+1) a_{n+1} x^n                      & \longleftrightarrow (n a_n)_{n \in \N}                         \\
+    \int F(x) dx = \sum_{n=0}^\infty \frac{a_n}{n+1} x^{n+1} = \sum_{n=1}^\infty \frac{a_{n-1}}{n} x^n & \longleftrightarrow \left(\frac{a_{n-1}}{n}\right)_{n \in \N}.
+\end{align*}
+Es sei $\K \in \{\R, \C\}$. Wir wissen bereits, dass die generierende Funktion einer Folge eindeutig ist. Somit können wir eine bijektive Abbildung
+\begin{align*}
+    \mathcal{G} : \K^{\N_0} \to \mathbb{K}[[x]], (a_n)_{n \in \N_0} \mapsto \sum_{n=0}^\infty a_n x^n
+\end{align*} definieren, welche einer Folge, bzw. äquivalent einer Abbildung $\N_0 \to \K$ (oder auch $\N \to \K$) ihre formale Potenzreihe zuordnet. Insbesondere sind $\K^{\N_0}$ und $\K[[x]]$ beide $\K$--Vektorräume und wie man sich leicht vergewissert ist $\mathcal{G}$ eine lineare Abbildung - und somit ein Isomorphismus.
+Es ist außerdem zu erwähnen, dass die hier definierten generierenden Funktionen die sog. \emph{gewöhnlichen} generierenden Funktionen sind. Je nach Anwendung werden z.B. auch sog. exponential generierende Funktionen
+\begin{align*}
+    \mathcal{EG} : : \K^{\N_0} \to \mathbb{K}[[x]], (a_n)_{n \in \N_0} \mapsto \sum_{n=0}^\infty a_n \frac{x^n}{n!}
+\end{align*}
+eingesetzt. Weiterhin können wir ganz analog für multivariate Funktionen $\N^N \to \K$ Verfahren und z.B.
+\begin{align*}
+    \mathcal{G}^N : \K^{\N_0^N} \to \mathbb{K}[[x_1,...,x_N]], (a_{n_1,...,n_N})_{n \in \N_0^N} \mapsto \sum_{n_1,...,n_N=0}^\infty a_n x_1^{n_1}...x_N^{x_N}
+\end{align*}
+definieren.
+
+\section{Integraltransformationen}
+
+\subsection*{Die Laplace-Transformation}
+
+Wir haben also eine Möglichkeit gefunden um Rekurrenzbeziehungen mittels analytischen Methoden zu untersuchen und ggf. Aussagen über Folgen - und somit Funktionen $\N \to \K$ zu treffen. Wir wollen untersuchen ob diese Methodik sinnvoll auf ''stetige Folgen'', also Funktionen $\R \to \K$ ausgeweitet werden kann.
+Für eine gegebene Folge $(a_n)$ mit Rekkurenzbeziehung $a_{n+1} = F(a_n)$ berechnet sich der Wert $a_{n+1}$ aus dem ''vergangenen'' Wert $a_n$ - somit beeinflusst die Folge ihre eigene Änderung. Genauso gilt für eine Folge $(a_n)$ mit Rekkurenzbeziehung $a_{n+2} = F(a_n, a_{n+1})$, dass $a_n$ den Wert $a_{n+1}$ beeinflusst hat, und beide beeinflussen wiederum $a_{n+2}$. Diese Argument lässt sich für allgemeine (explizite) Rekurrenzbeziehungen $a_{n+k+1} = F(a_n, ..., a_{n+k})$ wiederholen und lässt letzendlich eine Analogie zu Differentialgleichungen, bei denen der ''bisherige'' Funktionsverlauf den aktuellen bestimmt, vermuten.
+Der Einfachheit halber sei nun $\K = \R$. Es sei $f \in \mathcal{C}^\infty$ eine glatte Funktion. Wir fordern hierbei die Glattheit da wir explizit Differentialgleichungen untersuchen wollen. Die natürliche Erweiterung von diskreten Reihen auf ein stetiges Konstrukt ist das Integral, wir definieren daher den Raum $\int \K[x]$ als Analogon zum Raum $\K[[x]]$ der formalen Potenzreihen. Wir definieren zunächst naiv
+\begin{align*}
+    \mathcal{G} : \K^\R \to \int \K[x], f \mapsto \int_0^\infty f(t) x^t dt.
+\end{align*}
+Betrachten wir nun den Ausdruck $\frac{df}{dt}=Df$ und seine generierende Funktion. Es gilt
+\begin{align*}
+    \mathcal{G}(Df)(x) = \int_0^\infty Df(t) x^t dt = [f(t) x^t]_0^\infty - \int_0^\infty f(t) t  x^{t-1} dt,
+\end{align*}
+und wir bemerken, dass wir leider keine so einfache Korrespondenz zwischen $\mathcal{G}(f)$ und $\mathcal{G}(Df)$ erreichen. Es sei daher
+\begin{align*}
+    \mathcal{G} : \K^\R \to \int \K[x], f \mapsto \int_0^\infty f(t) g(x)^t dt.
+\end{align*}
+mit einer Funktion $g$ welche wir bestimmen wollen, sodass die aus dem diskreten Fall bekannte Gleichung \ref{gfVerschiebungDiskret}
+\begin{align}
+    \mathcal{G}(Df)(x) = x \mathcal{G}(f)(x) - f(0) \label{gfVerschiebungStetig}
+\end{align}
+gilt.
+Wie zuvor berechnen wir
+\begin{align*}
+    \mathcal{G}(Df)(x) = \int_0^\infty Df(t) g(x)^t dt = [f(t) g(x)^t]_0^\infty - \int_0^\infty f(t) D(g(x)^t) dt.
+\end{align*}
+Mit Gl. \ref{gfVerschiebungStetig} ergibt sich
+\begin{align*}
+    [f(t) g(x)^t]_0^\infty - \int_0^\infty f(t) D(g(x)^t) dt                          & \overset{!}{=} x G(f)(x) - f(0) =                    \\
+    \lim_{t \to \infty} f(t) g(x)^t - f(0) - \int_0^\infty f(t) \partial_t(g(x)^t) dt & \overset{!}{=} x\int_0^\infty f(t) g(x)^t dt - f(0),
+\end{align*}
+woraus wir die hinreichenden Bedingungen
+\begin{align}
+    \lim_{t \to \infty} f(t) g(x)^t \overset{!}{=} 0 \label{bed1} \\
+    -\partial_t(g(x)^t) \overset{!}{=} xg(x)^t \label{bed2}
+\end{align}
+ableiten. Betrachten wir zunächst Gl. \ref{bed2} indem wir die Ableitung berechnen so ergibt sich
+\begin{align*}
+    \partial_t (g(x)^t) = g(x)^t \ln(g(x)) & \overset{!}{=} -xg(x)^t \\
+    \iff \ln(g(x))                         & \overset{!}{=} -x       \\
+    \iff g(x)                              & \overset{!}{=} e^{-x}
+\end{align*}
+Es folgt $g(x)^t = e^{-tx}$ womit für $\lim_{t \to \infty} |f(t)| \neq \infty$ Gl. \ref{bed1} folgt.
+Somit gilt
+\begin{align*}
+    \mathcal{G} : \K^\R \to \int \K[x], f \mapsto \int_0^\infty f(t) e^{-xt} dt.
+\end{align*}
+Bemerkenswerterweise handelt es sich hierbei exakt um die Laplace-Tranformation
+\begin{align*}
+    \mathcal{L} : \C^{[0,\infty)} \to \mathcal{L}\left(\C^{[0,\infty)}\right), \mathcal{L}(f)(s) := \int_0^\infty f(t) e^{-st} dt
+\end{align*}
+und somit können wir Integraltransformationen intuitiv als stetige generierende Funktionen betrachten.
+
+\subsection*{Bestimmung generierender Funktionen}
+
+Berechnen wir die generierenden Funktionen einiger einfacher Funktionen erhalten wir
+\begin{align*}
+    \mathcal{G}(1)(x) & = \int_0^\infty e^{-xt} dt = \left. \int_0^{-\infty} e^u  \left(-\frac{1}{x}\right) du \right\vert_{u(t)=-xt} = \frac{1}{x} \int_{-\infty}^0 e^u du = \frac{1}{x}     \\
+    \mathcal{G}(t)(x) & = \int_0^\infty t e^{-xt} dt = \left[-\frac{t e^{-xt}}{x}\right]_0^\infty + \frac{1}{x} \int_0^\infty e^{-xt} dt = 0 + \frac{1}{x} \mathcal{G}(1)(x) = \frac{1}{x^2}.
+\end{align*}
+Da diese Integrale allerdings schnell unhandlich werden können wir auch andere Herangehensweisen wählen. So wissen wir beispielsweise, dass das Anfangswertproblem $Df = f, f(0) = 1$ durch die Exponentialfunktion gelöst wird. Für die generierende Funktion der Lösung gilt allerdings nach Gl. \ref{gfVerschiebungStetig}
+\begin{align*}
+    x\mathcal{G}(f)(x) - f(0) = \mathcal{G}(f)(x) \iff \mathcal{G}(f)(x) = \frac{1}{x-1}.
+\end{align*}
+Wir haben somit die generierende Funktion  der Exponentialfunktion über eine verwandte Differentialgleichung bestimmt.
+Analog finden wir die generierende Funktion von $t \mapsto e^{at}, a \in \R$ über $Df = a f, f(0) = 1$:
+\begin{align}
+    \mathcal{G}(e^{at})(x) = \frac{1}{x-a}. \label{laplaceExp}
+\end{align}
+
+\subsection*{Fibonacci Funktion}
+
+Es sei $f \in  \mathcal{C}^\infty$, sodass
+\begin{align*}
+    f = Df + D^2f, Df \equiv 1, D^2f \equiv 0.
+\end{align*}
+Beidseitige Anwendung von $\mathcal{G}$ mit $F := \mathcal{G}(f)$ liefert
+\begin{align*}
+    F(x) - xf(1) - f(0) & = (xF(x) - f(0)) + x^2F(x)                                                                                   \\
+    \iff F(x)           & = \frac{x}{1 - x - x^2} = \frac{1}{\sqrt{5}} \left( \frac{\psi}{x+\psi} - \frac{\varphi}{x+\varphi} \right).
+\end{align*}
+Aus Gleichung \ref{laplaceExp} und der Linearität von $\mathcal{G}$ folgt somit sofort
+\begin{align*}
+    F         & = \frac{1}{\sqrt{5}} (\psi \mathcal{G}(e^{-\psi t}) - \varphi \mathcal{G}(e^{-\varphi t})) \\
+    \iff f(t) & = \frac{1}{\sqrt{5}}(\psi e^{-\psi t} - \varphi e^{-\varphi t}).
+\end{align*}
+
+\end{document}

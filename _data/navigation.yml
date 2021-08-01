@@ -1,0 +1,11 @@
+main:
+  - title: "Home"
+    url: "/"
+  - title: "Posts"
+    url: /archive/
+  - title: "CV"
+    url: /cv/
+  - title: "Search"
+    url: /search/
+  - title: "CAD"
+    url: /cad/
