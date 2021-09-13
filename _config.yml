@@ -104,17 +104,17 @@ author:
   avatar: "/assets/images/bio-photo.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio: >-
     Student of industrial mathematics, state certified electrical engineer specialized in CS/IT and electrician.
-    Doing research in high performance computing for finite element simulations.
-    Interested in all kinds of tech and mathematics, spaceflight and programming languages.
+    Currently doing research in high performance computing for finite element simulations.
+    Interested in all kinds of tech and mathematics, spaceflight, renewables and programming languages.
   location: "Germany"
   email: "volzstefan97@googlemail.com"
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:volzstefan97@googlemail.com"
+    #- label: "Email"
+    #  icon: "fas fa-fw fa-envelope-square"
+    #  url: "mailto:volzstefan97@googlemail.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://sv-97.github.io"
+      url: "https://stefanvolz.online/"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"
