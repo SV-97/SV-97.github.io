@@ -3,6 +3,7 @@ layout: single
 title: The coin change problem
 #mathjax: true
 categories: math programming python haskell
+published: false
 ---
 
 The [change-making problem](https://en.wikipedia.org/wiki/Change-making_problem) is a classic problem, where the goal is to divide an amount of money evenly into coins. We'll use this problem to show off different programming paradigms/styles. We'll imagine a vending machine that can take in coins until a treshold value (the price of the item a user bought) is reached - we then give him the change back as a set of coins.
