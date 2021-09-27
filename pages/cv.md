@@ -32,7 +32,7 @@ toc_label: "Inhalte"
 
 | Jahr | Titel | Autoren | Journal | Status |
 |---|
-| 2021 | High-performance computing for electromagnetical finite element simulations | Stefan Volz, Prof. Dr. Georg Wimmer | The 12th International Symposium on Electric and Magnetic Fields | In Arbeit |
+| 2021 | High-performance computing for electromagnetical finite element simulations | Stefan Volz, Prof. Dr. Georg Wimmer, Sebastian Lange | International Journal of Numerical Modelling: Electronic Networks, Devices and Fields | In Review |
 | 2019 | Test- und Integrationssystem für SCADA-Software | Yannis Köhler, Stefan Volz | Technikerarbeit | Veröffentlicht |
 
 ### Fachvorträge
