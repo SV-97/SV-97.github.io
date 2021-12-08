@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+\PYG{k+kn}{from} \PYG{n+nn}{galois} \PYG{k+kn}{import} \PYG{n}{GF2} \PYG{k}{as} \PYG{n}{Z2}
+\PYG{k+kn}{import} \PYG{n+nn}{re}
+
+\PYG{n}{CODES} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+    \PYG{l+s+s2}{\PYGZdq{}abcefg\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{0}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}cf\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}acdeg\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{2}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}acdfg\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{3}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}bcdf\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{4}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}abdfg\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{5}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}abdefg\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{6}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}acf\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{7}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}abcdefg\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{8}\PYG{p}{,}
+    \PYG{l+s+s2}{\PYGZdq{}abcdfg\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{9}\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{} We want to interpret the 7\PYGZhy{}segment display as a 7\PYGZhy{}dimensional vector over Z/2Z=Z₂.}
+\PYG{c+c1}{\PYGZsh{} To do this we start by mapping a\PYGZhy{}g to e\PYGZus{}1, ..., e\PYGZus{}7.}
+\PYG{n}{ident} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{eye}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,} \PYG{n}{dtype}\PYG{o}{=}\PYG{n}{Z2}\PYG{p}{)}
+\PYG{n}{ident\PYGZus{}z2} \PYG{o}{=} \PYG{n}{Z2}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{eye}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,} \PYG{n}{dtype}\PYG{o}{=}\PYG{n}{Z2}\PYG{p}{))}
+\PYG{n}{mapping} \PYG{o}{=} \PYG{n+nb}{dict}\PYG{p}{(}\PYG{n+nb}{zip}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}abcdefg\PYGZdq{}}\PYG{p}{,} \PYG{n}{ident}\PYG{p}{))}
+
+
+\PYG{c+c1}{\PYGZsh{} we now encode each of our strings with characters from a\PYGZhy{}g as a combination}
+\PYG{c+c1}{\PYGZsh{} of our basis vectors.}
+\PYG{k}{def} \PYG{n+nf}{encode}\PYG{p}{(}\PYG{n}{string}\PYG{p}{):}
+    \PYG{k}{return} \PYG{n+nb}{sum}\PYG{p}{(}\PYG{n}{mapping}\PYG{p}{[}\PYG{n}{char}\PYG{p}{]} \PYG{k}{for} \PYG{n}{char} \PYG{o+ow}{in} \PYG{n}{string}\PYG{p}{)}
+
+\PYG{n}{c} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{([}\PYG{n+nb}{tuple}\PYG{p}{(}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{k}\PYG{p}{))} \PYG{k}{for} \PYG{n}{k} \PYG{o+ow}{in} \PYG{n}{CODES}\PYG{p}{])}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}
+\end{Verbatim}

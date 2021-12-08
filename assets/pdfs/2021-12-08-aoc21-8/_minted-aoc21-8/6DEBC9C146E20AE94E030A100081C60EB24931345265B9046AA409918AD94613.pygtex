@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{c+c1}{\PYGZsh{} I\PYGZsq{}m assuming that all the definitions and imports from the earlier}
+    \PYG{c+c1}{\PYGZsh{} listing are already done here.}
+
+    \PYG{c+c1}{\PYGZsh{} we start with one line of our input that we manually split up}
+    \PYG{n}{signal\PYGZus{}pattern} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}dcbgefa cebd bfega eadbf db cdfaeb dba bfcgda egadcf aedcf\PYGZdq{}}
+    \PYG{n}{output\PYGZus{}values} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}egadcfb eafcd db debc\PYGZdq{}}
+    \PYG{c+c1}{\PYGZsh{} we\PYGZsq{}ll encode this by mapping each string to it\PYGZsq{}s corresponding vector}
+    \PYG{n}{encoded\PYGZus{}patterns} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}
+        \PYG{p}{[}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{string}\PYG{p}{)} \PYG{k}{for} \PYG{n}{string} \PYG{o+ow}{in} \PYG{n}{signal\PYGZus{}pattern}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{p}{)}
+        \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{string}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{7}\PYG{p}{])}
+    \PYG{c+c1}{\PYGZsh{} and the same thing for the output\PYGZus{}values \PYGZhy{} although we won\PYGZsq{}t need them}
+    \PYG{c+c1}{\PYGZsh{} for a while.}
+    \PYG{n}{encoded\PYGZus{}right\PYGZus{}side} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}
+        \PYG{p}{[}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{string}\PYG{p}{)} \PYG{k}{for} \PYG{n}{string} \PYG{o+ow}{in} \PYG{n}{output\PYGZus{}values}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{p}{)])}
+\end{Verbatim}

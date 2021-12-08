@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{c+c1}{\PYGZsh{} We\PYGZsq{}ll also define the Z₂ versions of those arrays. Essentially the}
+    \PYG{c+c1}{\PYGZsh{} same thing, the just behave differently under addition etc.}
+    \PYG{n}{encoded\PYGZus{}patterns\PYGZus{}z2} \PYG{o}{=} \PYG{n}{Z2}\PYG{p}{(}\PYG{n}{encoded\PYGZus{}patterns}\PYG{p}{)}
+    \PYG{n}{right\PYGZus{}sides\PYGZus{}z2} \PYG{o}{=} \PYG{n}{Z2}\PYG{p}{(}\PYG{n}{right\PYGZus{}sides}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} we now calculate the so called weight of each vector (so each row):}
+    \PYG{c+c1}{\PYGZsh{} the number of non\PYGZhy{}zero entries. We\PYGZsq{}re doing this by abusing the sum}
+    \PYG{c+c1}{\PYGZsh{} operation.}
+    \PYG{n}{lengths} \PYG{o}{=} \PYG{n}{encoded\PYGZus{}patterns}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{axis}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} lengths == array([4, 5, 5, 2, 6, 3, 6, 6, 5], dtype=object)}
+\end{Verbatim}
