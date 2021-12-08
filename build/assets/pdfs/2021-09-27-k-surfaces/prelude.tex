@@ -1,0 +1,273 @@
+\usepackage{pdfpages}
+\usepackage[german]{babel}
+\usepackage[hyphens]{url} % break long url's with hyphens
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\usepackage{tocbibind}
+
+%\usepackage{multicol}
+\usepackage[breakable]{tcolorbox}
+\usepackage{csquotes}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{float}
+
+\usepackage{footmisc} % footnote references
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{svg}
+
+%\usepackage{quiver}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usetikzlibrary{babel}
+
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{.666\textwidth}
+
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+
+%\usepackage[numbib]{tocbibind}
+
+\usepackage[]{algorithm2e}
+
+\usepackage[style=alphabetic]{biblatex}
+\addbibresource{sources.bib}
+
+\pagestyle{fancy} %eigener Seitenstil
+\fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
+\fancyhead[L]{\leftmark} %Kopfzeile links mit Section Name. Mit \rightmark geht Subsection Name
+\fancyhead[C]{} %zentrierte Kopfzeile
+\fancyhead[R]{Stefan Volz} %Kopfzeile rechts
+\renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
+\fancyfoot[C]{\thepage} %Seitennummer
+\renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
+
+\setcounter{tocdepth}{2}
+\setlength{\parindent}{0pt}
+
+% custom theorem style für newlines zu beginn des Satzes
+\newtheoremstyle{mainTheoremStyle}%    <name>
+{\topsep}%   <space above>
+{\topsep}%   <space below>
+{}%  <body font> % was \itshape
+{}%          <indent amount>
+{\bfseries}% <Theorem head font>
+{.}%         <punctuation after theorem head>
+{\newline}%  <space after theorem head> (default .5em)
+{}%          <Theorem head spec>
+\theoremstyle{mainTheoremStyle}
+
+% internal / raw theorem environments
+\newtheorem{int_theorem}{Satz}[section]
+\newtheorem{int_definition}[int_theorem]{Definition}
+\newtheorem{notation}[int_theorem]{Notation}
+\newtheorem{int_lemma}[int_theorem]{Lemma}
+\newtheorem{int_corollary}[int_theorem]{Korollar}
+\newtheorem{int_remark}[int_theorem]{Bemerkung}
+\newtheorem{int_example}[int_theorem]{Beispiel}
+
+\newenvironment{theorem}[1][]{%        % Create new environment which wraps our Theorem into a tcolorbox.
+\begin{tcolorbox}[
+    breakable,
+    colback=blue!5!white,%     Background color.
+    width=\dimexpr\linewidth+10pt\relax,%     Allow your box to be bigger than \linewidth ...
+    enlarge left by=-5pt,%                    ... in order to have the text properly aligned. ...
+    enlarge right by=-5pt,%                   ... Note that boxsep = -enlargeLeft = -enlargeRight = 0.5*enlargement of width. ...
+    boxsep=5pt,%                              ... This is necessary to keep everything good looking.
+    left=0pt,%                                Avoid extra space on the left, ...
+    right=0pt,%                               ... right, ...
+    top=0pt,%                                 ... top, ...
+    bottom=0pt,%                              ... and bottom.
+    arc=0pt,%                                 Corners not rounded.
+    boxrule=0pt,%                             No boxrule.
+    colframe=white]{}{}%                      Make rest of the boxrule invisible.
+\ifstrempty{#1}{%                         If you didn't specify the optional argument of Theorem ...
+    \begin{int_theorem}%                     ... then open a normal Theorem ...
+
+}{%                                       ... else ...
+    \begin{int_theorem}[#1]%                 ... open a Theorem and use the optional argument.
+        }%
+        }{%
+    \end{int_theorem}%                          Close every environment.
+    \end{tcolorbox}%
+}
+
+\newenvironment{definition}[1][]{%        % Create new environment which wraps our Theorem into a tcolorbox.
+\begin{tcolorbox}[
+    breakable,
+    colback=red!5!white,%     Background color.
+    width=\dimexpr\linewidth+10pt\relax,%     Allow your box to be bigger than \linewidth ...
+    enlarge left by=-5pt,%                    ... in order to have the text properly aligned. ...
+    enlarge right by=-5pt,%                   ... Note that boxsep = -enlargeLeft = -enlargeRight = 0.5*enlargement of width. ...
+    boxsep=5pt,%                              ... This is necessary to keep everything good looking.
+    left=0pt,%                                Avoid extra space on the left, ...
+    right=0pt,%                               ... right, ...
+    top=0pt,%                                 ... top, ...
+    bottom=0pt,%                              ... and bottom.
+    arc=0pt,%                                 Corners not rounded.
+    boxrule=0pt,%                             No boxrule.
+    colframe=white]{}{}%                      Make rest of the boxrule invisible.
+\ifstrempty{#1}{%                         If you didn't specify the optional argument of Theorem ...
+    \begin{int_definition}%                     ... then open a normal Theorem ...
+}{%                                       ... else ...
+    \begin{int_definition}[#1]%                 ... open a Theorem and use the optional argument.
+        }%
+        }{%
+    \end{int_definition}%                          Close every environment.
+    \end{tcolorbox}%
+}
+
+\newenvironment{lemma}[1][]{%        % Create new environment which wraps our Theorem into a tcolorbox.
+\begin{tcolorbox}[
+    breakable,
+    colback=yellow!5!white,%     Background color.
+    width=\dimexpr\linewidth+10pt\relax,%     Allow your box to be bigger than \linewidth ...
+    enlarge left by=-5pt,%                    ... in order to have the text properly aligned. ...
+    enlarge right by=-5pt,%                   ... Note that boxsep = -enlargeLeft = -enlargeRight = 0.5*enlargement of width. ...
+    boxsep=5pt,%                              ... This is necessary to keep everything good looking.
+    left=0pt,%                                Avoid extra space on the left, ...
+    right=0pt,%                               ... right, ...
+    top=0pt,%                                 ... top, ...
+    bottom=0pt,%                              ... and bottom.
+    arc=0pt,%                                 Corners not rounded.
+    boxrule=0pt,%                             No boxrule.
+    colframe=white]{}{}%                      Make rest of the boxrule invisible.
+\ifstrempty{#1}{%                         If you didn't specify the optional argument of Theorem ...
+    \begin{int_lemma}%                     ... then open a normal Theorem ...
+}{%                                       ... else ...
+    \begin{int_lemma}[#1]%                 ... open a Theorem and use the optional argument.
+        }%
+        }{%
+    \end{int_lemma}%                          Close every environment.
+    \end{tcolorbox}%
+}
+
+\newenvironment{corollary}[1][]{%        % Create new environment which wraps our Theorem into a tcolorbox.
+\begin{tcolorbox}[
+    breakable,
+    colback=purple!5!white,%     Background color.
+    width=\dimexpr\linewidth+10pt\relax,%     Allow your box to be bigger than \linewidth ...
+    enlarge left by=-5pt,%                    ... in order to have the text properly aligned. ...
+    enlarge right by=-5pt,%                   ... Note that boxsep = -enlargeLeft = -enlargeRight = 0.5*enlargement of width. ...
+    boxsep=5pt,%                              ... This is necessary to keep everything good looking.
+    left=0pt,%                                Avoid extra space on the left, ...
+    right=0pt,%                               ... right, ...
+    top=0pt,%                                 ... top, ...
+    bottom=0pt,%                              ... and bottom.
+    arc=0pt,%                                 Corners not rounded.
+    boxrule=0pt,%                             No boxrule.
+    colframe=white]{}{}%                      Make rest of the boxrule invisible.
+\ifstrempty{#1}{%                         If you didn't specify the optional argument of Theorem ...
+    \begin{int_corollary}%                     ... then open a normal Theorem ...
+}{%                                       ... else ...
+    \begin{int_corollary}[#1]%                 ... open a Theorem and use the optional argument.
+        }%
+        }{%
+    \end{int_corollary}%                          Close every environment.
+    \end{tcolorbox}%
+}
+
+\newenvironment{remark}[1][]{%        % Create new environment which wraps our Theorem into a tcolorbox.
+\begin{tcolorbox}[
+    breakable,
+    colback=green!5!white,%     Background color.
+    width=\dimexpr\linewidth+10pt\relax,%     Allow your box to be bigger than \linewidth ...
+    enlarge left by=-5pt,%                    ... in order to have the text properly aligned. ...
+    enlarge right by=-5pt,%                   ... Note that boxsep = -enlargeLeft = -enlargeRight = 0.5*enlargement of width. ...
+    boxsep=5pt,%                              ... This is necessary to keep everything good looking.
+    left=0pt,%                                Avoid extra space on the left, ...
+    right=0pt,%                               ... right, ...
+    top=0pt,%                                 ... top, ...
+    bottom=0pt,%                              ... and bottom.
+    arc=0pt,%                                 Corners not rounded.
+    boxrule=0pt,%                             No boxrule.
+    colframe=white]{}{}%                      Make rest of the boxrule invisible.
+\ifstrempty{#1}{%                         If you didn't specify the optional argument of Theorem ...
+    \begin{int_remark}%                     ... then open a normal Theorem ...
+}{%                                       ... else ...
+    \begin{int_remark}[#1]%                 ... open a Theorem and use the optional argument.
+        }%
+        }{%
+    \end{int_remark}%                          Close every environment.
+    \end{tcolorbox}%
+}
+
+\newenvironment{example}[1][]{%        % Create new environment which wraps our Theorem into a tcolorbox.
+\begin{tcolorbox}[
+    breakable,
+    colback=yellow!5!white,%     Background color.
+    width=\dimexpr\linewidth+10pt\relax,%     Allow your box to be bigger than \linewidth ...
+    enlarge left by=-5pt,%                    ... in order to have the text properly aligned. ...
+    enlarge right by=-5pt,%                   ... Note that boxsep = -enlargeLeft = -enlargeRight = 0.5*enlargement of width. ...
+    boxsep=5pt,%                              ... This is necessary to keep everything good looking.
+    left=0pt,%                                Avoid extra space on the left, ...
+    right=0pt,%                               ... right, ...
+    top=0pt,%                                 ... top, ...
+    bottom=0pt,%                              ... and bottom.
+    arc=0pt,%                                 Corners not rounded.
+    boxrule=0pt,%                             No boxrule.
+    colframe=white]{}{}%                      Make rest of the boxrule invisible.
+\ifstrempty{#1}{%                         If you didn't specify the optional argument of Theorem ...
+    \begin{int_example}%                     ... then open a normal Theorem ...
+}{%                                       ... else ...
+    \begin{int_example}[#1]%                 ... open a Theorem and use the optional argument.
+        }%
+        }{%
+    \end{int_example}%                          Close every environment.
+    \end{tcolorbox}%
+}
+
+%\usepackage{thmtools}
+%\renewcommand{\listtheoremsname}{Sätze und Definitionen}
+
+\newcommand{\underbraced}[2]{\ensuremath{\underset{#2}{\underbrace{#1}}}}
+
+\renewcommand{\Re}{\text{Re}}
+\renewcommand{\Im}{\text{Im}}
+
+\def\R{\ensuremath{\mathbb{R}}}
+\def\C{\ensuremath{\mathbb{C}}}
+\def\N{\ensuremath{\mathbb{N}}}
+\def\Z{\ensuremath{\mathbb{Z}}}
+\def\H{\ensuremath{\mathbb{H}}}
+\def\K{\ensuremath{\mathbb{K}}}
+\def\e{e}
+\def\i{\mathscr{i}}
+
+\newenvironment{smallpmatrix}
+{\left(\begin{smallmatrix}}
+        {\end{smallmatrix}\right)}
+
+\def\vol#1#2{\text{vol}_{#1}(#2)}
+\def\Jacobian#1{J_{#1}}
+\def\Rang#1{\text{Rang}(#1)}
+\def\Innerproduct#1#2{\langle#1, #2 \rangle}
+\def\LinearMaps#1#2{L(#1, #2)}
+\def\diag{\text{diag}}
+\def\norm#1{\lVert#1\rVert}
+\def\shortbio#1#2#3{\textsc{#1}, #2, #3}
+\def\floor#1{\left\lfloor{#1}\right\rfloor}
+\def\trace#1{\text{Spur }#1}
+\def\length#1{\mathcal{L}\ifstrempty{#1}{}{[#1]}}
+\def\diff#1{\mathsf{D} #1}
+\def\diffMulti#1#2{\mathsf{D}^{#2} #1}
+\def\variation#1#2#3{\delta #1[#2, #3]}
+\let\eps\epsilon
+\let\epsilon\varepsilon
+\def\orthogonal#1{#1^\bot}
+\def\tangential#1{#1^\top}
+\let\tilde\widetilde
+\def\endomorphism#1{\text{End}(#1)}
+\def\grad#1{\nabla#1}
+\def\CovariantDerivative#1#2{\frac{\diff #1}{d#2}}

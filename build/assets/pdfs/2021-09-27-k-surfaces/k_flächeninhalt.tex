@@ -1,0 +1,196 @@
+%%% Template originaly created by Karol Kozioł (mail@karol-koziol.net) and modified for ShareLaTeX use
+
+\documentclass[a4paper,11pt]{article}
+
+\input{prelude.tex}
+
+%%%----------%%%----------%%%----------%%%----------%%%
+
+\begin{document}
+
+\title{Rechtfertigung für Gramsche Determinante in Definition des $k$-Flächeninhalts}
+
+\author{Stefan Volz}
+
+\date{\today}
+
+\maketitle
+
+\section{Test}
+
+\begin{definition}[$k$-Fläche]
+
+    Sei $k \leq n \in \N$.
+    Wir nennen $S \subseteq \R^n$ eine $k$-Fläche wenn
+    \begin{itemize}
+        \item $M$ eine $k$-dimensionale Mannigfaltigkeit ist und
+        \item $S$ eine globale Parametrisierung besitzt.
+    \end{itemize}
+\end{definition}
+
+Sei nun $S \subseteq \R^n$ eine $k$-Fläche mit Parametrisierung $\varphi : K \to S$.
+
+Für $k = n$ wissen wir bereits, dass durch
+\begin{align*}
+    \vol{n}{S} = \int_K |\det \Jacobian{\varphi}(x)| d^n x
+\end{align*}
+ein Volumenbegriff definiert wird. Intuitiv misst hierbei die Funktionaldeterminante in jedem Punkt $x \in K$ wie sehr die Abbildung $\varphi$ den Raum $K$ ausdehnt um ihn zu $S$ zu verformen.
+
+Für $k < n$ ist allerdings $\Jacobian{\varphi}(x) \in \R^{n, m}$ keine quadratische Matrix und somit können wir nicht die Determinante nutzen um diese Ausdehnung zu bestimmen, wir wollen daher eine allgemeinere Definition finden. Betrachten wir nun $\Jacobian{\varphi}(x)$ als lineare Abbildung $\ell : \R^k \to \R^n$ welche unsere Fläche verformt und in den höherdimensionalen Raum legt. Intuitiv könnten wir uns vorstellen dass wir diese Abbildung in zwei Teilabbildungen zerlegen können:
+\begin{itemize}
+    \item eine (lineare) Abbildung $\psi : \R^k \to \R^k$ welche den Verformungsanteil enthält und
+    \item eine (lineare) Abbildung $\pi : \R^k \to \R^n$ welche unsere Fläche im $\R^n$ ablegt.
+\end{itemize}
+Sind $A_\psi \in \R^{k, k}$ und $A_\pi \in \R^{n,k}$ darstellende Matrizen dieser Abbildungen sollte also
+\begin{align*}
+    \ell = \pi \circ \psi \iff \Jacobian{\varphi}(x) = A_\pi A_\psi
+\end{align*}
+gelten. Welche Eigenschaften sollten diese Matrizen haben? Da $S$ eine $k$-dimensionale Untermannigfaltigkeit ist, gilt $\Rang{\Jacobian{\varphi}(x)} = k$. Die Rangungleich von Sylvester besagt, dass für $A \in \R^{n,k}, B \in \R^{k, m}$ folgende Ungleichung erfüllt ist:
+\begin{align*}
+    \Rang{A} + \Rang{B} - k \leq \Rang{AB} \leq \min{\Rang{A}, \Rang{B}}.
+\end{align*}
+Wir finden in unserem Fall also
+\begin{align*}
+    \Rang{A_\pi} + \Rang{A_\psi} - k \leq \Rang{\Jacobian{\varphi}(x)} = k \leq \min (\Rang{A_\pi}, \Rang{A_\psi}),
+\end{align*}
+woraus wir $\Rang{A_\pi} = \Rang{A_\psi} = k$ schließen. Wenden wir uns nun $A_\pi$ im Detail zu. Wie bereits erwähnt fordern wir, dass es unsere Fläche nicht weiter verformt, sondern nur im $R^n$ ablegt - wie lässt sich dies mathematisch präzisieren? Wir könnten uns z.B. vorstellen, dass die Form sich nicht verändert wenn alle Längen und Winkel bei der Abbildung erhielten blieben.
+Der Winkel $\alpha \in [0, \pi]$ zwischen Vektoren $v,w \in \R^k$ ist definiert durch
+\begin{align*}
+    \cos \alpha = \frac{\Innerproduct{v}{w}}{\norm{v}_2 \norm{w}_2},
+\end{align*}
+unsere Längen- und Winkeltreue bedeutet also, dass für alle $v, w \in \R^k$
+\begin{align*}
+    \norm{A_\pi v}_2                                                          & = \norm{v}_2 \text{ und}                            \\
+    \frac{\Innerproduct{A_\pi v}{A_\pi w}}{\norm{A_\pi v}_2 \norm{A_\pi w}_2} & = \frac{\Innerproduct{v}{w}}{\norm{v}_2 \norm{w}_2}
+\end{align*}
+gelten soll. Wir sehen schnell ein, dass dies äquivalent zu
+\begin{align*}
+    \Innerproduct{A_\pi v}{A_\pi w} & = \Innerproduct{v}{w}
+\end{align*}
+ist. Dies ist die definierende Eigenschaft von orthogonalen Abbildungen.
+\begin{definition}{(Orthogonale Abbildung)}
+
+    Seien $V, W$ $\K$-Vektorräume mit Skalarprodukten $\langle\cdot,\cdot\rangle_V$ und $\langle\cdot,\cdot\rangle_W$. Dann nennen wir $f \in \LinearMaps{V}{W}$ orthogonal wenn für alle $v, w \in V$
+    \begin{align}
+        \langle v, w\rangle_V = \langle f(v), f(w)\rangle_W
+    \end{align}
+    gilt.
+\end{definition}
+Die darstellenden Matrizen orthogonaler Abbildungen $\R^n \to \R^n$ bezeichnen wir als orthogonale Matrizen und die Menge all dieser Matrizen mit $O(n)$. Diese Menge wird auch die orthogonale Gruppe genannt. Allgemeiner bezeichnen wir die Menge aller $n \times k$ Matrizen mit orthonormalen Spalten durch $O(n,k)$. Analog definieren wir $U(n)$ als unitäre Gruppe für Abbildungen $\C^n \to \C^n$, bzw. die Notation $U(n, k)$ für nichtquadratische unitäre Matrizen.
+
+\begin{remark}
+    Orthogonale Abbildungen auf euklidischen Räumen beschreiben Drehungen, Spiegelungen und deren Kompositionen.
+\end{remark}
+
+Aus der linearen Algebra ergibt sich zudem der folgende Satz.
+\begin{theorem}(QR-Zerlegung)
+
+    Sei $K \in \{\R, \C\}$. Für eine Matrix $A \in \K^{n, m}$ mit Rang $m$ existieren eine spaltenorthogonale Matrix $Q \in O(n, m)$ bzw. $U(n, m)$ sowie eine obere Dreiecksmatrix $R \in GL_m(\K)$ mit
+    \begin{align}
+        A = QR.
+    \end{align}
+\end{theorem}
+Wir sehen, dass wir also eine QR-Zerlegung von $\Jacobian{\varphi}(x)$ suchen.
+Seien nun $A_\pi, A_\psi$ so eine QR-Zerlegung, dann finden wir analog zum Fall $n=k$ dass $A_\psi$ die Fläche mit ihrer Determinante, also dem Produkt ihrere Eigenwerte streckt und intuitiv wird diese gestreckte Fläche durch $A_\pi$ nichtmehr verändert. Es verbleibt die Frage wie wir diesen Streckungsfaktor bestimmen und ob er überhaupt wohldefiniert ist: wenn $Q, R$ und $Q', R'$ jeweils eine QR-Zerlegung von $\Jacobian{\varphi}(x)$ bilden, gilt dann stets $|\det Q| = |\det Q'|$? Die Antwort hierauf liefert wieder die lineare Algebra mittels der Singulärwertzerlegung.
+\begin{theorem}{(Singulärwertzerlegung - SVD)}\label{theo:svd}
+
+    Sei $A \in \C^{n,m}, m \leq n$. Dann existieren $V \in U(n), W \in U(m)$, so dass
+    \begin{align}
+        A = V \Sigma W^H \text{ mit } \Sigma = \begin{smallpmatrix}
+            \Sigma_r & 0_{r, m-r} \\
+            0_{n-r, r} & 0_{n-r, m-r}
+        \end{smallpmatrix} \in \R^{n,m}
+    \end{align}
+    wobei $\Sigma_r = \diag(\sigma_1 \geq \sigma_2 \geq ... \geq \sigma_r > 0), r = \Rang{A}$. Wir bezeichnen die Werte $\sigma_i$ als Singulärwerte von $A$.
+\end{theorem}
+Ein analoger Satz gilt für reelle Matrizen, hierbei sind $V$ und $W$ orthogonal und die hermitesch Transponierte kann mit einer regulär Transponierten ersetzt werden.
+Für unsere Zwecke wichtig ist, dass die Singulärwerte eindeutig sind.
+
+Wir wollen nun die Singulärwertzerlegung nutzen um eine QR-Zerlegung zu bestimmen. Sei daher $\Jacobian{\varphi}(x) = V \Sigma W^T$ wie im Satz \ref{theo:svd}, dann können wir $\Sigma \in \R^{n,k}$ wie folgt zerlegen
+\begin{align*}
+    \Sigma = \begin{smallpmatrix}
+        I_m \\
+        0_{n-m}
+    \end{smallpmatrix} \Sigma_r.
+\end{align*}
+Dann ist mit $Q := V \begin{smallpmatrix}
+        I_m \\
+        0_{n-m}
+    \end{smallpmatrix}, R := \Sigma_r W^T$ eine QR-Zerlegung von $\Jacobian{\varphi}(x)$ gegeben. Da $W^T \in O(k)$ gilt $|\det W^T| = 1$ und somit
+\begin{align*}
+    |\det R| = \left|\prod_{i=1}^k \sigma_i \right|.
+\end{align*}
+
+\begin{remark}
+    Für quadratische Matrizen stimmen die Singulärwerte mit den Eigenwerten überein. Wir führen also eine strikte Verallgemeinerung unserer Volumensdefinition durch.
+\end{remark}
+
+Wir würden nun gerne vermeiden, immer die SVD bestimmen zu müssen.
+Hierzu benötigen wir das folgende Lemma:
+\begin{lemma}
+    $Q \in O(n)$ ist genau dann orthogonal wenn $Q^T Q = I_n$.
+\end{lemma}
+
+Wir bemerken
+\begin{align*}
+    \Jacobian{\varphi}(x)^T \Jacobian{\varphi}(x) = (V \Sigma W^T)^T V \Sigma W^T          & = W \Sigma V^T V \Sigma W^T = W \Sigma^2 W^T \\
+    \underset{|\det W| = 1}{\implies} \det (\Jacobian{\varphi}(x)^T \Jacobian{\varphi}(x)) & = \det \Sigma^2 = \prod_{i=1}^k \sigma_i^2.
+\end{align*}
+
+\begin{definition}{(Maßtensor, Gram'sche Matrix / Determinante)}
+
+    Sei $S \subseteq \R^n$ eine $k$-Fläche mit globaler Parametrisierung $\varphi : K \to S$. Für alle $x \in K$ nennen wir
+    \begin{align*}
+        G^\varphi(x) := \Jacobian{\varphi}(x)^T \Jacobian{\varphi}(x)
+    \end{align*}
+    Gram'sche Matrix von $\varphi$.
+    Die Abbildung
+    \begin{align*}
+        g^\varphi : K \to \R^{k, k}, x \mapsto G^\varphi(x)
+    \end{align*}
+    nennen wir Maßtensor über $S$ und $\det G^\varphi(x)$ die Gram'sche Determinante von $\varphi$ bei $x \in K$.
+\end{definition}
+
+Schlussendlich definieren wir damit unseren Flächeninhalt
+
+\begin{definition}($k$-Flächeninhalt)
+
+    Sei $S \subseteq \R^n$ eine $k$-Fläche mit globaler Parametrisierung $\varphi : K \to S$. Dann ist der $k$-Flächeninhalt bzw. das $k$-Volumen von $S$ definiert durch
+    \begin{align}
+        \vol{k}{S} := \int_K \sqrt{\det g^\varphi (x)} d^kx.
+    \end{align}
+\end{definition}
+
+\begin{example}(Oberfläche einer Kugel)
+
+    Betrachten wir die Oberfläche der Kugel $B_r(0)$ mit Radius $r > 0$ als 2-Fläche im $\R^3$. Diese besitzt die globale Parametrisierung (abgesehen von einer Nullmenge)
+    \begin{align}
+        \sigma : (0, \pi) \times (0, 2\pi), (\vartheta, \varphi) \mapsto r \begin{smallpmatrix}
+            \cos \vartheta \cos \varphi \\
+            \cos \vartheta \sin \varphi \\
+            \sin \vartheta
+        \end{smallpmatrix}.
+    \end{align}
+    Die Jacobimatrix bei $x := (\vartheta, \varphi)$ ist
+    \begin{align*}
+        \Jacobian{\sigma}(x) = \begin{smallpmatrix}
+            -\sin \vartheta \cos \varphi & - \cos \vartheta \sin \varphi \\
+            -\sin \vartheta \sin \varphi & \cos \vartheta \cos \varphi \\
+            \cos \vartheta & 0
+        \end{smallpmatrix}
+    \end{align*}
+    und die Gram'sche Matrix somit
+    \begin{align*}
+        G^\sigma(x) = \Jacobian{\sigma}(x)^T \Jacobian{\sigma}(x) = r^2 \begin{smallpmatrix}
+            1 & 0 \\
+            0 & 1 - \sin^2 \vartheta
+        \end{smallpmatrix}.
+    \end{align*}
+    Wir erhalten daher für den Flächeninhalt
+    \begin{align*}
+        \vol{2}{B_r(0)} & = \int_0^\pi \int_0^{2 \pi} \sqrt{r^4(1 - \sin^2 \vartheta)} d\varphi d\vartheta \\
+                        & = 2 \pi r^2 \int_0^\pi |\cos \vartheta| d\vartheta                               \\
+                        & = 4 \pi r^2.
+    \end{align*}
+\end{example}
+\end{document}
