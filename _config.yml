@@ -104,7 +104,7 @@ author:
   avatar: "/assets/images/bio-photo.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio: >-
     Student of industrial mathematics, state certified electrical engineer specialized in CS/IT and electrician.
-    Doing research in high performance computing for finite element simulations.
+    Currently working on high-performance simulations for satellite orbits, related footprint calculations and instrument-data synthesis at the DLR; as well as working on calibration software using FEM on the side.
     Interested in all kinds of tech and mathematics, spaceflight and programming languages.
   location: "Germany"
   email: "volzstefan97@googlemail.com"
