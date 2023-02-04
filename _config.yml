@@ -103,9 +103,8 @@ author:
   name: "Stefan Volz"
   avatar: "/assets/images/bio-photo.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio: >-
-    Student of industrial mathematics, state certified electrical engineer specialized in CS/IT and electrician.
-    Currently working on satellite simulations / data synthesis and finite element simulations.
-    Interested in all kinds of tech and mathematics, spaceflight, renewables and programming languages.
+    Industrial mathematician, software engineer and electrical engineer specialized in CS/IT and electrician.
+    Interested in all kinds of mathematics and tech, spaceflight, renewables and programming languages.
   location: "Germany"
   email: "volzstefan97@googlemail.com"
   links:
